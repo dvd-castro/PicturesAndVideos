@@ -28,12 +28,12 @@ import androidx.compose.ui.unit.sp
 @Composable
 @Preview
 private fun SearchWidgetPreview() {
-    SearchWidget(onSeachClick = {})
+    SearchWidget(onSearchClick = {})
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchWidget(onSeachClick: (text: String)-> Unit) {
+fun SearchWidget(onSearchClick: (text: String)-> Unit) {
 
     var text by rememberSaveable(stateSaver = TextFieldValue.Saver) {
         mutableStateOf(TextFieldValue(""))
@@ -46,7 +46,7 @@ fun SearchWidget(onSeachClick: (text: String)-> Unit) {
         shape = ShapeDefaults.Medium,
         placeholder = { Text(text = "Pesquisar...", fontSize = 13.sp )},
         trailingIcon = {
-            IconButton(onClick = {onSeachClick.invoke(text.text)}) {
+            IconButton(onClick = {onSearchClick.invoke(text.text)}) {
                 Icon(
                     imageVector = Icons.Filled.Search,
                     contentDescription = "Botão de pesquisar"
