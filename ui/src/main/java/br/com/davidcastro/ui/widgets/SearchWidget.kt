@@ -46,7 +46,7 @@ fun SearchWidget(onSearchClick: (text: String)-> Unit) {
         shape = ShapeDefaults.Medium,
         placeholder = { Text(text = "Pesquisar...", fontSize = 13.sp )},
         trailingIcon = {
-            IconButton(onClick = {onSearchClick.invoke(text.text)}) {
+            IconButton(onClick = { onSearchClick.invoke(text.text) }) {
                 Icon(
                     imageVector = Icons.Filled.Search,
                     contentDescription = "Botão de pesquisar"
@@ -57,7 +57,7 @@ fun SearchWidget(onSearchClick: (text: String)-> Unit) {
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent
         ),
-        modifier = Modifier.height(50.dp).padding(top = 0.dp),
+        modifier = Modifier.height(50.dp),
         textStyle = TextStyle.Default.copy(fontSize = 13.sp),
     )
 }
