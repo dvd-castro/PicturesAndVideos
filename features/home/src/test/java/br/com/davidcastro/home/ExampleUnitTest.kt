@@ -1,4 +1,4 @@
-package br.com.davidcastro.features
+package br.com.davidcastro.home
 
 import org.junit.Test
 
