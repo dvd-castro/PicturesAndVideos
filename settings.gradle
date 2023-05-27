@@ -14,7 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "PicturesAndVideos"
 include ':app'
-include ':features'
 include ':ui'
 include ':data'
-include ':features:home'
