@@ -49,4 +49,5 @@ android {
 
 dependencies {
     implementation project(path: ':ui')
+    implementation project(path: ':features')
 }

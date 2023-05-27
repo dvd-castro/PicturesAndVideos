@@ -16,3 +16,4 @@ rootProject.name = "PicturesAndVideos"
 include ':app'
 include ':ui'
 include ':data'
+include ':features'
