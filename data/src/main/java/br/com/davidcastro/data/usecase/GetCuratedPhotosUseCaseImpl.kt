@@ -2,8 +2,9 @@ package br.com.davidcastro.data.usecase
 
 import br.com.davidcastro.data.model.PhotoResponse
 import br.com.davidcastro.data.repository.ApiRepository
+import javax.inject.Inject
 
-class GetCuratedPhotosUseCaseImpl(private val api: ApiRepository): GetCuratedPhotosUseCase {
+class GetCuratedPhotosUseCaseImpl @Inject constructor(private val api: ApiRepository): GetCuratedPhotosUseCase {
 
     override suspend fun getCuratedPhotos(): PhotoResponse? {
         val result = api.getCuratedPhotos()

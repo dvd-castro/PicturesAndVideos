@@ -5,8 +5,9 @@ import br.com.davidcastro.data.model.PhotoResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
+import javax.inject.Inject
 
-class ApiRepositoryImpl(private val api: Api): ApiRepository {
+class ApiRepositoryImpl @Inject constructor(private val api: Api): ApiRepository {
 
     override suspend fun getCuratedPhotos(): Response<PhotoResponse> = withContext(Dispatchers.IO) {
         return@withContext api.getCuratedPhotos()
