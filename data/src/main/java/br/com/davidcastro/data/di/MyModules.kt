@@ -9,21 +9,25 @@ import br.com.davidcastro.data.usecase.GetCuratedPhotosUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ActivityComponent::class)
-object MyModule {
+@InstallIn(SingletonComponent::class)
+class MyModule {
 
     @Provides
+    @Singleton
     fun provideApi(): Api =
         RetrofitClient.getRetrofitInstance(Api::class.java, "https://api.pexels.com/")
 
     @Provides
+    @Singleton
     fun provideApiRepository(api: Api): ApiRepository =
         ApiRepositoryImpl(api)
 
     @Provides
+    @Singleton
     fun provideGetCuratedPhotoUseCase(repository: ApiRepository): GetCuratedPhotosUseCase =
         GetCuratedPhotosUseCaseImpl(repository)
 
