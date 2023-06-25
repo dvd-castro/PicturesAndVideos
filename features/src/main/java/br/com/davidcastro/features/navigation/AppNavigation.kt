@@ -21,7 +21,6 @@ import br.com.davidcastro.ui.widgets.ToolbarWidget
 @Composable
 fun AppNavigation(
     navController: NavHostController = rememberNavController(),
-    homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreenName = backStackEntry?.destination?.route ?: Routes.HomeScreen.name

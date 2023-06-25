@@ -26,11 +26,14 @@ import br.com.davidcastro.ui.R
 @Preview
 @Composable
 private fun BannerWidgetPreview() {
-    BannerWidget()
+    BannerWidget {}
 }
 
 @Composable
-fun BannerWidget() {
+fun BannerWidget(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
     Surface(
         modifier = Modifier
             .clip(
