@@ -16,19 +16,22 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class MyModule {
 
-    @Provides
     @Singleton
+    @Provides
     fun provideApi(): Api =
         RetrofitClient.getRetrofitInstance(Api::class.java, "https://api.pexels.com/")
 
-    @Provides
     @Singleton
-    fun provideApiRepository(api: Api): ApiRepository =
+    @Provides
+    fun provideApiRepository(
+        api: Api
+    ): ApiRepository =
         ApiRepositoryImpl(api)
 
-    @Provides
     @Singleton
-    fun provideGetCuratedPhotoUseCase(repository: ApiRepository): GetCuratedPhotosUseCase =
+    @Provides
+    fun provideGetCuratedPhotoUseCase(
+        repository: ApiRepository
+    ): GetCuratedPhotosUseCase =
         GetCuratedPhotosUseCaseImpl(repository)
-
 }
