@@ -1,6 +1,7 @@
 package br.com.davidcastro.ui.widgets
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -43,7 +44,10 @@ fun BannerWidget(
                 )
             )
             .height(300.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable {
+                onClick.invoke()
+            },
         color = Color.DarkGray
     ) {
         Image(
