@@ -6,7 +6,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,7 +13,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import br.com.davidcastro.features.screens.curated.CuratedScreen
 import br.com.davidcastro.features.screens.home.view.HomeScreen
-import br.com.davidcastro.features.screens.home.viewmodel.HomeViewModel
 import br.com.davidcastro.ui.widgets.ToolbarWidget
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,8 +27,8 @@ fun AppNavigation(
         topBar = {
             ToolbarWidget(
                 canNavigateBack = currentScreenName != Routes.HomeScreen.name,
-                actionButton = { canNavigateBack ->
-                    if(canNavigateBack) {
+                actionButton = {
+                    if(currentScreenName != Routes.HomeScreen.name) {
                         navController.navigateUp()
                     } else {
                         //TODO open menu

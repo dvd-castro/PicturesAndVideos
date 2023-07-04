@@ -8,16 +8,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ToolbarWidget(
     canNavigateBack: Boolean,
-    actionButton: (canNavigateBack: Boolean)-> Unit,
+    actionButton: () -> Unit,
     onSearchClick: (text: String) -> Unit) {
 
     CenterAlignedTopAppBar(
@@ -27,7 +23,7 @@ fun ToolbarWidget(
         navigationIcon = {
             if(canNavigateBack) {
                 IconButton(
-                    onClick = { actionButton(true) }
+                    onClick = { actionButton() }
                 ) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
@@ -36,7 +32,7 @@ fun ToolbarWidget(
                 }
             } else {
                 IconButton(
-                    onClick = { actionButton(false) }
+                    onClick = { actionButton() }
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Menu,
