@@ -9,8 +9,8 @@ import javax.inject.Inject
 
 class ApiRepositoryImpl @Inject constructor(private val api: Api): ApiRepository {
 
-    override suspend fun getCuratedPhotos(): Response<PhotoResponse> = withContext(Dispatchers.IO) {
-        return@withContext api.getCuratedPhotos()
+    override suspend fun getCuratedPhotos(page: Int): Response<PhotoResponse> = withContext(Dispatchers.IO) {
+        return@withContext api.getCuratedPhotos(page)
     }
 
     override suspend fun getPopularPhotos(): Response<PhotoResponse> = withContext(Dispatchers.IO) {

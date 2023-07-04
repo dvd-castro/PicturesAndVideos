@@ -6,10 +6,12 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 private const val DEFAULT_PER_PAGE = 80
+private const val DEFAULT_PAGE = 1
 
 interface Api {
     @GET("/v1/curated")
     fun getCuratedPhotos(
+        @Query("page") page: Int = DEFAULT_PAGE,
         @Query("per_page") perPage: Int = DEFAULT_PER_PAGE
     ): Response<PhotoResponse>
 
