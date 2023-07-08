@@ -10,13 +10,13 @@ private const val DEFAULT_PAGE = 1
 
 interface Api {
     @GET("/v1/curated")
-    fun getCuratedPhotos(
+    suspend fun getCuratedPhotos(
         @Query("page") page: Int = DEFAULT_PAGE,
         @Query("per_page") perPage: Int = DEFAULT_PER_PAGE
     ): Response<PhotoResponse>
 
     @GET("/v1/popular")
-    fun getPopularPhotos(
+    suspend fun getPopularPhotos(
         @Query("per_page") perPage: Int = DEFAULT_PER_PAGE
     ): Response<PhotoResponse>
 }
