@@ -2,15 +2,23 @@ package br.com.davidcastro.features.screens.home.view
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import br.com.davidcastro.features.screens.home.viewmodel.HomeViewModel
 import br.com.davidcastro.ui.widgets.BannerCarousel
+import br.com.davidcastro.ui.widgets.CollectionWidget
+import br.com.davidcastro.ui.widgets.SessionTitleWidget
 
 @Composable
 fun HomeScreen(
@@ -32,5 +40,10 @@ fun HomeScreen(
                 //TODO ação de clique
             }
         }
+        SessionTitleWidget(
+            text = "Coleções",
+            modifier = Modifier.padding(16.dp)
+        )
+        CollectionWidget()
     }
 }
