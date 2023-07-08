@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import br.com.davidcastro.data.model.PhotoResponse
+import br.com.davidcastro.ui.theme.Green
 
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -71,11 +72,11 @@ fun BannerCarousel(
         ) {
             items(pageCount) {
                 if(pagerState.currentPage == it) {
-                    CircleWithBorder(borderColor = Color.Green, borderWidth = 1.dp, size = 16.dp) {
-                        ColoredCircle(color = Color.Green, size = 8.dp, content = {})
+                    CircleWithBorder(borderColor = Green, borderWidth = 1.dp, size = 16.dp) {
+                        ColoredCircle(color = Green, size = 8.dp, content = {})
                     }
                 } else  {
-                    CircleWithBorder(borderColor = Color.Green, borderWidth = 1.dp, size = 16.dp, content = {})
+                    CircleWithBorder(borderColor = Green, borderWidth = 1.dp, size = 16.dp, content = {})
                 }
             }
         }
@@ -96,7 +97,7 @@ fun BannerCarousel(
             Icon(
                 imageVector = Icons.Rounded.ArrowForward,
                 contentDescription = "",
-                tint = Color.White,
+                tint = Green,
                 modifier = Modifier.size(46.dp)
             )
         }

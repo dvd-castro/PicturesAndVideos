@@ -1,6 +1,5 @@
 package br.com.davidcastro.features.screens.home.view
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable

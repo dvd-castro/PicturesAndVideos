@@ -22,6 +22,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.com.davidcastro.ui.theme.Green
 
 
 @Composable
@@ -48,7 +49,8 @@ fun SearchWidget(onSearchClick: (text: String)-> Unit) {
             IconButton(onClick = { onSearchClick.invoke(text.text) }) {
                 Icon(
                     imageVector = Icons.Filled.Search,
-                    contentDescription = "Botão de pesquisar"
+                    contentDescription = "Botão de pesquisar",
+                    tint = Green
                 )
             } },
         colors = TextFieldDefaults.textFieldColors(
