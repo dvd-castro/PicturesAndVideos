@@ -13,6 +13,6 @@ fun SessionTitleWidget(
 ) {
     Text(
         text = text,
-        modifier = Modifier.padding(16.dp)
+        modifier = modifier.padding(16.dp)
     )
 }

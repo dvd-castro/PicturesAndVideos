@@ -11,7 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import br.com.davidcastro.features.screens.home.viewmodel.HomeViewModel
+import br.com.davidcastro.features.navigation.Routes
+import br.com.davidcastro.features.viewmodel.MainViewModel
 import br.com.davidcastro.ui.widgets.BannerCarousel
 import br.com.davidcastro.ui.widgets.CollectionWidget
 import br.com.davidcastro.ui.widgets.SessionTitleWidget
@@ -20,12 +21,12 @@ import br.com.davidcastro.ui.widgets.SessionTitleWidget
 fun HomeScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    homeViewModel: HomeViewModel = hiltViewModel(),
+    mainViewModel: MainViewModel = hiltViewModel(),
 ) {
-    val homeState by homeViewModel.homeState.collectAsState()
+    val homeState by mainViewModel.homeState.collectAsState()
 
     LaunchedEffect(Unit) {
-        homeViewModel.getCuratedPhotos(1)
+        mainViewModel.getCuratedBannerPhotos(1)
     }
 
     Column(
@@ -33,7 +34,7 @@ fun HomeScreen(
     ) {
         homeState.bannerState.response?.let {
             BannerCarousel(it) {
-                //TODO ação de clique
+                navController.navigate(Routes.CuratedScreen.name)
             }
         }
         SessionTitleWidget(
