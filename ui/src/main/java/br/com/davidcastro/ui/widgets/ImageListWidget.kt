@@ -19,7 +19,8 @@ import br.com.davidcastro.data.model.Photo
 fun ImageListWidget(
     modifier: Modifier = Modifier,
     photos: List<Photo>,
-    loadMore: (page: Int) -> Unit
+    loadMore: (page: Int) -> Unit,
+    onItemClick: () -> Unit
 ) {
     var currentPage by rememberSaveable { mutableStateOf(1) }
     val listState = rememberLazyGridState()
@@ -37,7 +38,9 @@ fun ImageListWidget(
                 }
                 currentPage+=1
             } else {
-                RoundedImage(url = it.src.medium)
+                RoundedImage(url = it.src.medium) {
+                    onItemClick.invoke()
+                }
             }
         }
     }

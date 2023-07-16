@@ -13,6 +13,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import br.com.davidcastro.features.screens.curated.view.CuratedScreen
 import br.com.davidcastro.features.screens.home.view.HomeScreen
+import br.com.davidcastro.features.screens.photodetails.view.PhotoDetailsScreen
 import br.com.davidcastro.ui.widgets.ToolbarWidget
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -48,6 +49,9 @@ fun AppNavigation(
                 }
                 composable(Routes.CuratedScreen.name) {
                     CuratedScreen(modifier, navController)
+                }
+                composable(Routes.PhotoScreen.name) {
+                    PhotoDetailsScreen(modifier, navController)
                 }
             }
         })
