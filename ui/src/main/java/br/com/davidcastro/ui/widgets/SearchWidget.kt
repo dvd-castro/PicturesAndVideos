@@ -1,6 +1,8 @@
 package br.com.davidcastro.ui.widgets
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -23,7 +25,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.davidcastro.ui.theme.Green
-
 
 @Composable
 @Preview
@@ -58,7 +59,7 @@ fun SearchWidget(onSearchClick: (text: String)-> Unit) {
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent
         ),
-        modifier = Modifier.height(50.dp),
+        modifier = Modifier.height(50.dp).padding(start = 22.dp).fillMaxWidth(),
         textStyle = TextStyle.Default.copy(fontSize = 13.sp),
     )
 }

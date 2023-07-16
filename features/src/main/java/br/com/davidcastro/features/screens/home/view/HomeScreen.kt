@@ -2,13 +2,11 @@ package br.com.davidcastro.features.screens.home.view
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import br.com.davidcastro.features.navigation.Routes
@@ -37,10 +35,7 @@ fun HomeScreen(
                 navController.navigate(Routes.CuratedScreen.name)
             }
         }
-        SessionTitleWidget(
-            text = "Coleções",
-            modifier = Modifier.padding(16.dp)
-        )
+        SessionTitleWidget(text = "Coleções")
         CollectionWidget()
     }
 }
