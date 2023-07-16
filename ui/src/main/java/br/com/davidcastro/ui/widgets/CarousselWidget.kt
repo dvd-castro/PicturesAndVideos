@@ -29,7 +29,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import br.com.davidcastro.data.model.PhotoResponse
 import br.com.davidcastro.ui.theme.Green
 
-
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BannerCarousel(

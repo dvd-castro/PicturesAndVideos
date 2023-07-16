@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import br.com.davidcastro.features.navigation.Routes
 import br.com.davidcastro.features.viewmodel.MainViewModel
 import br.com.davidcastro.ui.widgets.ImageListWidget
 
@@ -25,8 +26,13 @@ fun CuratedScreen(
     if(curatedState.photos.isNotEmpty()) {
         ImageListWidget(
             modifier = modifier,
-            photos = curatedState.photos) {
-            mainViewModel.getCuratedPhotos(page = it)
-        }
+            photos = curatedState.photos,
+            loadMore = {
+                mainViewModel.getCuratedPhotos(page = it)
+            },
+            onItemClick = {
+                navController.navigate(Routes.PhotoScreen.name)
+            }
+        )
     }
 }

@@ -1,5 +1,6 @@
 package br.com.davidcastro.ui.widgets
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -16,7 +17,8 @@ import coil.compose.AsyncImage
 @Composable
 fun RoundedImage(
     modifier: Modifier = Modifier,
-    url: String
+    url: String,
+    onClick: () -> Unit
 ) {
     Box(modifier = modifier.padding(8.dp)) {
         Surface(
@@ -28,7 +30,10 @@ fun RoundedImage(
             AsyncImage(
                 model = url,
                 contentDescription = null,
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                modifier = modifier.clickable {
+                    onClick.invoke()
+                }
             )
         }
     }
