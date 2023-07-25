@@ -11,9 +11,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import br.com.davidcastro.data.model.PhotoResponse
 import br.com.davidcastro.features.screens.curated.view.CuratedScreen
 import br.com.davidcastro.features.screens.home.view.HomeScreen
+import br.com.davidcastro.features.screens.photodetails.data.PhotoDetailState
 import br.com.davidcastro.features.screens.photodetails.view.PhotoDetailsScreen
 import br.com.davidcastro.ui.utils.extensions.getRouteArgs
 import br.com.davidcastro.ui.widgets.ToolbarWidget
@@ -53,8 +53,8 @@ fun AppNavigation(
                     CuratedScreen(modifier, navController)
                 }
                 composable("${Routes.PhotoScreen.name}/{photos}") {
-                    val photoResponse = it.getRouteArgs("photos", PhotoResponse::class.java)
-                    PhotoDetailsScreen(modifier, navController, photoResponse)
+                    val photoDetailState = it.getRouteArgs("photos", PhotoDetailState::class.java)
+                    PhotoDetailsScreen(modifier, navController, photoDetailState)
                 }
             }
         })

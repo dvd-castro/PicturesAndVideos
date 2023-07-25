@@ -16,7 +16,7 @@ fun ImageListWidget(
     modifier: Modifier = Modifier,
     photos: List<Photo>,
     loadMore: () -> Unit,
-    onItemClick: () -> Unit
+    onItemClick: (index: Int) -> Unit
 ) { 
     val listState = rememberLazyGridState()
 
@@ -34,7 +34,7 @@ fun ImageListWidget(
                     }
                 } else {
                     RoundedImage(url = photo.src.medium) {
-                        onItemClick.invoke()
+                        onItemClick.invoke(photos.indexOf(photo))
                     }
                 }
             }

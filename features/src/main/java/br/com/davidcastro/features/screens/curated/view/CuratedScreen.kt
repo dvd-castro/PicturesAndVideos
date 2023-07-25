@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import br.com.davidcastro.features.navigation.Routes
+import br.com.davidcastro.features.screens.photodetails.data.PhotoDetailState
 import br.com.davidcastro.features.viewmodel.MainViewModel
 import br.com.davidcastro.ui.utils.extensions.navigateWithArgs
 import br.com.davidcastro.ui.widgets.ImageListWidget
@@ -31,8 +32,16 @@ fun CuratedScreen(
             loadMore = {
                 mainViewModel.getCuratedPhotos(curatedState.nextPage)
             },
-            onItemClick = {
-                navController.navigateWithArgs(Routes.PhotoScreen.name, curatedState)
+            onItemClick = { selectedIndex ->
+                navController.navigateWithArgs(
+                    Routes.PhotoScreen.name,
+                    PhotoDetailState(
+                        selectedIndex = selectedIndex,
+                        photos = curatedState.photos.filterIndexed { index, _ ->
+                            index == selectedIndex || index == selectedIndex + 1 || index == selectedIndex + 2
+                        }
+                    )
+                )
             }
         )
     }
