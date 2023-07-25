@@ -8,7 +8,6 @@ import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -23,15 +22,13 @@ fun BannerWidget(
 ) {
     Surface(
         modifier = Modifier
-            .clip(
-                AbsoluteRoundedCornerShape(
-                    bottomRight = 40.dp,
-                    bottomLeft = 40.dp
-                )
-            )
             .height(300.dp)
             .fillMaxWidth(),
-        color = Color.DarkGray
+        color = Color.DarkGray,
+        shape = AbsoluteRoundedCornerShape(
+            bottomRight = 40.dp,
+            bottomLeft = 40.dp
+        )
     ) {
         AsyncImage(
             model = url,

@@ -8,7 +8,6 @@ import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
@@ -22,10 +21,9 @@ fun RoundedImage(
 ) {
     Box(modifier = modifier.padding(8.dp)) {
         Surface(
-            modifier = modifier
-                .clip(AbsoluteRoundedCornerShape(16.dp))
-                .height(250.dp),
-            color = Color.DarkGray
+            modifier = modifier.height(250.dp),
+            color = Color.DarkGray,
+            shape = AbsoluteRoundedCornerShape(16.dp)
         ) {
             AsyncImage(
                 model = url,
