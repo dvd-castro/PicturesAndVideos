@@ -39,12 +39,11 @@ class MainViewModel @Inject constructor(
         val result = getCuratedPhotosUseCase.getCuratedPhotos(page)
 
         result.onSuccess { response ->
-            val newPhotos = curatedState.value.photos.toMutableList()
-            response?.photos?.let { photos ->
-                newPhotos.addAll(photos)
+            response?.let {
+                val newPhotos = curatedState.value.photos.toMutableList()
+                newPhotos.addAll(it.photos)
+                _curatedState.value = curatedState.value.copy(photos = newPhotos, nextPage = it.page + 1)
             }
-
-            _curatedState.value = curatedState.value.copy(photos = newPhotos)
         }
 
         result.onFailure {

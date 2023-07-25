@@ -6,4 +6,5 @@ data class CuratedState(
     val isLoading: Boolean = false,
     val photos: MutableList<Photo> = mutableListOf(),
     val hasError: Boolean = false,
+    val nextPage: Int = 1
 )

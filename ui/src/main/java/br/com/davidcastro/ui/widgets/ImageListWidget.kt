@@ -7,10 +7,6 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import br.com.davidcastro.data.model.Photo
@@ -19,10 +15,9 @@ import br.com.davidcastro.data.model.Photo
 fun ImageListWidget(
     modifier: Modifier = Modifier,
     photos: List<Photo>,
-    loadMore: (page: Int) -> Unit,
+    loadMore: () -> Unit,
     onItemClick: () -> Unit
-) {
-    var currentPage by rememberSaveable { mutableStateOf(1) }
+) { 
     val listState = rememberLazyGridState()
 
     LazyVerticalGrid(
@@ -31,15 +26,16 @@ fun ImageListWidget(
         contentPadding = PaddingValues(8.dp),
         state = listState
     ) {
-        items(photos) {
-            if(photos.indexOf(it) == photos.count() - 1) {
-                LaunchedEffect(Unit) {
-                    loadMore.invoke(currentPage)
-                }
-                currentPage+=1
-            } else {
-                RoundedImage(url = it.src.medium) {
-                    onItemClick.invoke()
+        items(photos) { photo ->
+            listState.let {
+                if(it.layoutInfo.visibleItemsInfo.isNotEmpty() && (photos.indexOf(photo) == (photos.count() - 1))) {
+                    LaunchedEffect(Unit) {
+                        loadMore.invoke()
+                    }
+                } else {
+                    RoundedImage(url = photo.src.medium) {
+                        onItemClick.invoke()
+                    }
                 }
             }
         }

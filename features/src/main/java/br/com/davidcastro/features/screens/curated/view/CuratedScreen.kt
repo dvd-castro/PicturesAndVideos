@@ -29,7 +29,7 @@ fun CuratedScreen(
             modifier = modifier,
             photos = curatedState.photos,
             loadMore = {
-                mainViewModel.getCuratedPhotos(page = it)
+                mainViewModel.getCuratedPhotos(curatedState.nextPage)
             },
             onItemClick = {
                 navController.navigateWithArgs(Routes.PhotoScreen.name, curatedState)
