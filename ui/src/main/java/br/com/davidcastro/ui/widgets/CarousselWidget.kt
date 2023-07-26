@@ -106,7 +106,7 @@ fun BannerCarousel(
 
 
 @Composable
-fun CircleWithBorder(borderColor: Color, borderWidth: Dp, size: Dp, content: @Composable () -> Unit) {
+private fun CircleWithBorder(borderColor: Color, borderWidth: Dp, size: Dp, content: @Composable () -> Unit) {
     Box(Modifier.padding(4.dp)) {
         Box(
             contentAlignment = Alignment.Center,
@@ -122,7 +122,7 @@ fun CircleWithBorder(borderColor: Color, borderWidth: Dp, size: Dp, content: @Co
 }
 
 @Composable
-fun ColoredCircle(color: Color, size: Dp, content: @Composable () -> Unit) {
+private fun ColoredCircle(color: Color, size: Dp, content: @Composable () -> Unit) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier

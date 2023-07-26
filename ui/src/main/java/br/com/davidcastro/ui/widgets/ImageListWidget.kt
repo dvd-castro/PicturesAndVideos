@@ -1,6 +1,8 @@
 package br.com.davidcastro.ui.widgets
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -33,7 +35,7 @@ fun ImageListWidget(
                         loadMore.invoke()
                     }
                 } else {
-                    RoundedImage(url = photo.src.medium) {
+                    RoundedImage(url = photo.src.medium, modifier = Modifier.height(250.dp).padding(8.dp)) {
                         onItemClick.invoke(photos.indexOf(photo))
                     }
                 }
