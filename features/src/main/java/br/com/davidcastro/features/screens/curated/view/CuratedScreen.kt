@@ -8,8 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import br.com.davidcastro.features.navigation.Routes
+import br.com.davidcastro.features.screens.curated.viewmodel.CuratedViewModel
 import br.com.davidcastro.features.screens.photodetails.data.PhotoDetailState
-import br.com.davidcastro.features.viewmodel.MainViewModel
 import br.com.davidcastro.ui.utils.extensions.navigateWithArgs
 import br.com.davidcastro.ui.widgets.ImageListWidget
 
@@ -17,12 +17,12 @@ import br.com.davidcastro.ui.widgets.ImageListWidget
 fun CuratedScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    mainViewModel: MainViewModel = hiltViewModel(),
+    curatedViewModel: CuratedViewModel = hiltViewModel(),
 ) {
-    val curatedState by mainViewModel.curatedState.collectAsState()
+    val curatedState by curatedViewModel.curatedState.collectAsState()
 
     LaunchedEffect(Unit) {
-        mainViewModel.getCuratedPhotos(1)
+        curatedViewModel.getCuratedPhotos(1)
     }
 
     if(curatedState.photos.isNotEmpty()) {
@@ -30,7 +30,7 @@ fun CuratedScreen(
             modifier = modifier,
             photos = curatedState.photos,
             loadMore = {
-                mainViewModel.getCuratedPhotos(curatedState.nextPage)
+                curatedViewModel.getCuratedPhotos(curatedState.nextPage)
             },
             onItemClick = { selectedIndex ->
                 navController.navigateWithArgs(

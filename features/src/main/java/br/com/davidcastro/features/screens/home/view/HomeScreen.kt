@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import br.com.davidcastro.features.navigation.Routes
-import br.com.davidcastro.features.viewmodel.MainViewModel
+import br.com.davidcastro.features.screens.home.viewmodel.HomeViewModel
 import br.com.davidcastro.ui.widgets.BannerCarousel
 import br.com.davidcastro.ui.widgets.CollectionWidget
 import br.com.davidcastro.ui.widgets.SessionTitleWidget
@@ -19,12 +19,12 @@ import br.com.davidcastro.ui.widgets.SessionTitleWidget
 fun HomeScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    mainViewModel: MainViewModel = hiltViewModel(),
+    homeViewModel: HomeViewModel = hiltViewModel(),
 ) {
-    val homeState by mainViewModel.homeState.collectAsState()
+    val homeState by homeViewModel.homeState.collectAsState()
 
     LaunchedEffect(Unit) {
-        mainViewModel.getCuratedBannerPhotos(1)
+        homeViewModel.getCuratedBannerPhotos(1)
     }
 
     Column(
