@@ -47,7 +47,7 @@ fun SearchWidget(onSearchClick: (text: String)-> Unit) {
         shape = ShapeDefaults.Medium,
         placeholder = { Text(text = "Pesquisar...", fontSize = 13.sp )},
         trailingIcon = {
-            IconButton(onClick = { onSearchClick.invoke(text.text) }) {
+            IconButton(onClick = { onSearchClick(text.text) }) {
                 Icon(
                     imageVector = Icons.Filled.Search,
                     contentDescription = "Botão de pesquisar",

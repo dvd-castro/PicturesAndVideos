@@ -41,7 +41,7 @@ fun BannerWidget(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .clickable {
-                    onClick.invoke()
+                    onClick()
                 }
         )
     }

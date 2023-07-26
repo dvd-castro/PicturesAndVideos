@@ -32,11 +32,11 @@ fun ImageListWidget(
             listState.let {
                 if(it.layoutInfo.visibleItemsInfo.isNotEmpty() && (photos.indexOf(photo) == (photos.count() - 1))) {
                     LaunchedEffect(Unit) {
-                        loadMore.invoke()
+                        loadMore()
                     }
                 } else {
                     RoundedImage(url = photo.src.medium, modifier = Modifier.height(250.dp).padding(8.dp)) {
-                        onItemClick.invoke(photos.indexOf(photo))
+                        onItemClick(photos.indexOf(photo))
                     }
                 }
             }

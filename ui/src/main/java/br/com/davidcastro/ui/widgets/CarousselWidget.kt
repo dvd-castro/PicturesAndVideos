@@ -53,7 +53,7 @@ fun BannerCarousel(
             }
         ) { position ->
             BannerWidget(url = list[position].src.original) {
-               onClick.invoke()
+               onClick()
             }
         }
 
@@ -116,7 +116,7 @@ private fun CircleWithBorder(borderColor: Color, borderWidth: Dp, size: Dp, cont
                 .border(width = borderWidth, color = borderColor, shape = CircleShape)
                 .background(color = Color.Transparent),
         ) {
-            content.invoke()
+            content()
         }
     }
 }
@@ -130,6 +130,6 @@ private fun ColoredCircle(color: Color, size: Dp, content: @Composable () -> Uni
             .clip(CircleShape)
             .background(color),
     ) {
-        content.invoke()
+        content()
     }
 }

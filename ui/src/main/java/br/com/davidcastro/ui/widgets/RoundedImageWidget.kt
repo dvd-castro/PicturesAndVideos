@@ -26,7 +26,7 @@ fun RoundedImage(
                 .padding(0.dp)
                 .clip(AbsoluteRoundedCornerShape(16.dp))
                 .clickable {
-                    onClick.invoke()
+                    onClick()
                 }
         )
     }
