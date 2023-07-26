@@ -35,16 +35,20 @@ fun BannerCarousel(
     response: PhotoResponse,
     onClick: () -> Unit
 ) {
-    val pagerState = rememberPagerState()
     val list = response.photos
     val pageCount = 5
+    val pagerState = rememberPagerState(
+        initialPage = 0,
+        initialPageOffsetFraction = 0f
+    ) {
+        pageCount
+    }
 
     ConstraintLayout {
         val (banner, bannerPosition, title) = createRefs()
 
         HorizontalPager(
             state = pagerState,
-            pageCount = pageCount,
             modifier = Modifier.constrainAs(banner) {
                 top.linkTo(parent.top)
                 start.linkTo(parent.start)
@@ -102,8 +106,6 @@ fun BannerCarousel(
         }
     }
 }
-
-
 
 @Composable
 private fun CircleWithBorder(borderColor: Color, borderWidth: Dp, size: Dp, content: @Composable () -> Unit) {
