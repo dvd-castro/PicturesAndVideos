@@ -54,7 +54,7 @@ fun AppNavigation(
                 }
                 composable("${Routes.PhotoScreen.name}/{photos}") {
                     val photoDetailState = it.getRouteArgs("photos", PhotoDetailState::class.java)
-                    PhotoDetailsScreen(modifier, navController, photoDetailState)
+                    PhotoDetailsScreen(modifier, photoDetailState)
                 }
             }
         })
