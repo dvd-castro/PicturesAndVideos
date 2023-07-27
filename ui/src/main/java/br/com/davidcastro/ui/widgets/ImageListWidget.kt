@@ -35,7 +35,12 @@ fun ImageListWidget(
                         loadMore()
                     }
                 } else {
-                    RoundedImage(url = photo.src.medium, modifier = Modifier.height(250.dp).padding(8.dp)) {
+                    RoundedImage(
+                        url = photo.src.medium,
+                        modifier = Modifier
+                            .height(250.dp)
+                            .padding(8.dp)
+                    ) {
                         onItemClick(photos.indexOf(photo))
                     }
                 }
