@@ -33,7 +33,7 @@ fun CuratedScreen(
                 modifier = modifier,
                 photos = curatedState.photos,
                 loadMore = {
-                    if(curatedState.hasEnd) {
+                    if(!curatedState.hasEnd) {
                         curatedViewModel.getCuratedPhotos(curatedState.nextPage)
                     }
                 },
