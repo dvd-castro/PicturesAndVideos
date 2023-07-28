@@ -1,4 +1,4 @@
-package br.com.davidcastro.features.screens.home.model
+package br.com.davidcastro.features.screens.home.model.state
 
 import br.com.davidcastro.data.model.PhotoResponse
 

@@ -3,8 +3,8 @@ package br.com.davidcastro.features.screens.home.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.davidcastro.data.usecase.GetCuratedPhotosUseCase
-import br.com.davidcastro.features.screens.home.model.BannerState
-import br.com.davidcastro.features.screens.home.model.HomeState
+import br.com.davidcastro.features.screens.home.model.state.BannerState
+import br.com.davidcastro.features.screens.home.model.state.HomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -33,5 +33,9 @@ class HomeViewModel @Inject constructor(
 
     private fun setBannerLoading(isLoading: Boolean) {
         _homeState.value = HomeState(BannerState(isLoading = isLoading))
+    }
+
+    fun getRecommendedPhotos(page: Int) {
+
     }
 }

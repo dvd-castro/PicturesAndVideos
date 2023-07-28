@@ -37,5 +37,6 @@ fun HomeScreen(
         }
         SessionTitleWidget(text = "Coleções")
         CollectionWidget()
+        SessionTitleWidget(text = "Recomendações")
     }
 }

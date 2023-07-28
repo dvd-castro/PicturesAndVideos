@@ -3,7 +3,7 @@ package br.com.davidcastro.features.screens.curated.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.davidcastro.data.usecase.GetCuratedPhotosUseCase
-import br.com.davidcastro.features.screens.curated.data.CuratedState
+import br.com.davidcastro.features.screens.curated.model.state.CuratedState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -1,4 +1,4 @@
-package br.com.davidcastro.features.screens.curated.data
+package br.com.davidcastro.features.screens.curated.model.state
 
 import br.com.davidcastro.data.model.Photo
 

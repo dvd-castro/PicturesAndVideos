@@ -37,18 +37,14 @@ fun BannerCarousel(
 ) {
     val list = response.photos
     val pageCount = 5
-    val pagerState = rememberPagerState(
-        initialPage = 0,
-        initialPageOffsetFraction = 0f
-    ) {
-        pageCount
-    }
+    val pagerState = rememberPagerState()
 
     ConstraintLayout {
         val (banner, bannerPosition, title) = createRefs()
 
         HorizontalPager(
             state = pagerState,
+            pageCount = 5,
             modifier = Modifier.constrainAs(banner) {
                 top.linkTo(parent.top)
                 start.linkTo(parent.start)
