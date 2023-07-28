@@ -13,7 +13,7 @@ class ApiRepositoryImpl @Inject constructor(private val api: Api): ApiRepository
         return@withContext api.getCuratedPhotos(page)
     }
 
-    override suspend fun getPopularPhotos(): Response<PhotoResponse> = withContext(Dispatchers.IO) {
+    override suspend fun getPopularPhotos(page: Int): Response<PhotoResponse> = withContext(Dispatchers.IO) {
         return@withContext api.getPopularPhotos()
     }
 }

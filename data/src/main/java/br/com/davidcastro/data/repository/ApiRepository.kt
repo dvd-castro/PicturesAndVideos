@@ -5,5 +5,5 @@ import retrofit2.Response
 
 interface ApiRepository {
     suspend fun getCuratedPhotos(page: Int): Response<PhotoResponse>
-    suspend fun getPopularPhotos(): Response<PhotoResponse>
+    suspend fun getPopularPhotos(page: Int): Response<PhotoResponse>
 }
