@@ -3,7 +3,7 @@ package br.com.davidcastro.features.screens.curated.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.davidcastro.data.usecase.GetCuratedPhotosUseCase
-import br.com.davidcastro.features.screens.curated.model.state.CuratedState
+import br.com.davidcastro.features.screens.popular.state.PopularState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,8 +15,8 @@ class CuratedViewModel @Inject constructor(
     private val getCuratedPhotosUseCase: GetCuratedPhotosUseCase
 ): ViewModel() {
 
-    private val _curatedState = MutableStateFlow(CuratedState())
-    val curatedState: StateFlow<CuratedState> = _curatedState
+    private val _curatedState = MutableStateFlow(PopularState())
+    val curatedState: StateFlow<PopularState> = _curatedState
 
     fun getCuratedPhotos(page: Int) = viewModelScope.launch {
         showLoad(true)

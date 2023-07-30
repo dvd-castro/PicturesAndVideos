@@ -100,7 +100,7 @@ private fun MainPicture(
     photo: Photo
 ) {
     AsyncImage(
-        model = photo.src.original,
+        model = photo.src.large,
         contentDescription = null,
         modifier = modifier,
         contentScale = ContentScale.Crop

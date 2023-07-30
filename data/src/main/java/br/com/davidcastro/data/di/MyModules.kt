@@ -6,6 +6,8 @@ import br.com.davidcastro.data.repository.ApiRepository
 import br.com.davidcastro.data.repository.ApiRepositoryImpl
 import br.com.davidcastro.data.usecase.GetCuratedPhotosUseCase
 import br.com.davidcastro.data.usecase.GetCuratedPhotosUseCaseImpl
+import br.com.davidcastro.data.usecase.GetPopularPhotosUseCase
+import br.com.davidcastro.data.usecase.GetPopularPhotosUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,4 +36,11 @@ class MyModule {
         repository: ApiRepository
     ): GetCuratedPhotosUseCase =
         GetCuratedPhotosUseCaseImpl(repository)
+
+    @Singleton
+    @Provides
+    fun provideGetPopularPhotoUseCase(
+        repository: ApiRepository
+    ): GetPopularPhotosUseCase =
+        GetPopularPhotosUseCaseImpl(repository)
 }

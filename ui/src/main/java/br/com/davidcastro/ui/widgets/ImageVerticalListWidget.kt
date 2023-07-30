@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import br.com.davidcastro.data.model.Photo
 
 @Composable
-fun ImageListWidget(
+fun ImageVerticalListWidget(
     modifier: Modifier = Modifier,
     photos: List<Photo>,
     loadMore: () -> Unit,

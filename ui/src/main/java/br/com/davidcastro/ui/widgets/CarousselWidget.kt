@@ -89,7 +89,7 @@ fun BannerCarousel(
                 }
         ) {
             Text(
-                text = "Destaques",
+                text = "Recomendações",
                 color = Color.White,
                 fontSize = 32.sp
             )

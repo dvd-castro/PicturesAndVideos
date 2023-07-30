@@ -1,4 +1,4 @@
-package br.com.davidcastro.features.screens.curated.view
+package br.com.davidcastro.features.screens.popular.view
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
@@ -9,22 +9,22 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import br.com.davidcastro.features.navigation.Routes
-import br.com.davidcastro.features.screens.curated.viewmodel.CuratedViewModel
 import br.com.davidcastro.features.screens.photodetails.data.PhotoDetailState
+import br.com.davidcastro.features.screens.popular.viewmodel.PopularViewModel
 import br.com.davidcastro.ui.utils.extensions.navigateWithArgs
 import br.com.davidcastro.ui.widgets.ImageVerticalListWidget
 import br.com.davidcastro.ui.widgets.LoaderVerticalImageListWidget
 
 @Composable
-fun CuratedScreen(
+fun PopularScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    curatedViewModel: CuratedViewModel = hiltViewModel(),
+    curatedViewModel: PopularViewModel = hiltViewModel(),
 ) {
-    val curatedState by curatedViewModel.curatedState.collectAsState()
+    val curatedState by curatedViewModel.popularState.collectAsState()
 
     LaunchedEffect(Unit) {
-        curatedViewModel.getCuratedPhotos(1)
+        curatedViewModel.getPopularPhotos(1)
     }
 
     Column {
@@ -34,7 +34,7 @@ fun CuratedScreen(
                 photos = curatedState.photos,
                 loadMore = {
                     if(!curatedState.hasEnd) {
-                        curatedViewModel.getCuratedPhotos(curatedState.nextPage)
+                        curatedViewModel.getPopularPhotos(curatedState.nextPage)
                     }
                 },
                 onItemClick = { selectedIndex ->

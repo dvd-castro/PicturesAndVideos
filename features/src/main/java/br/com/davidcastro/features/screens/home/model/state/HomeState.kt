@@ -3,11 +3,18 @@ package br.com.davidcastro.features.screens.home.model.state
 import br.com.davidcastro.data.model.PhotoResponse
 
 data class HomeState(
-    var bannerState: BannerState = BannerState(),
+    val bannerState: BannerState = BannerState(),
+    val popularState: PopularState = PopularState()
 )
 
 data class BannerState(
-    var isLoading: Boolean = false,
-    var response: PhotoResponse? = null,
-    var hasError: Boolean = false
+    val isLoading: Boolean = false,
+    val response: PhotoResponse? = null,
+    val hasError: Boolean = false
+)
+
+data class PopularState(
+    val isLoading: Boolean = false,
+    val response: PhotoResponse? = null,
+    val hasError: Boolean = false
 )

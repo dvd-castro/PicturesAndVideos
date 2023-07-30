@@ -13,6 +13,7 @@ import br.com.davidcastro.features.navigation.Routes
 import br.com.davidcastro.features.screens.home.viewmodel.HomeViewModel
 import br.com.davidcastro.ui.widgets.BannerCarousel
 import br.com.davidcastro.ui.widgets.CollectionWidget
+import br.com.davidcastro.ui.widgets.ImageHorizontalListWidget
 import br.com.davidcastro.ui.widgets.SessionTitleWidget
 
 @Composable
@@ -25,6 +26,7 @@ fun HomeScreen(
 
     LaunchedEffect(Unit) {
         homeViewModel.getCuratedBannerPhotos(1)
+        homeViewModel.getPopularPhotos(1)
     }
 
     Column(
@@ -37,6 +39,11 @@ fun HomeScreen(
         }
         SessionTitleWidget(text = "Coleções")
         CollectionWidget()
-        SessionTitleWidget(text = "Recomendações")
+        SessionTitleWidget(text = "Popular")
+        homeState.popularState.response?.let {
+            ImageHorizontalListWidget(photos = it.photos) {
+                navController.navigate(Routes.PopularScreen.name)
+            }
+        }
     }
 }
