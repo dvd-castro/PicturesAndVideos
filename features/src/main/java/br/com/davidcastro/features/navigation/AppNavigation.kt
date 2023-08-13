@@ -10,12 +10,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import br.com.davidcastro.features.screens.curated.view.CuratedScreen
 import br.com.davidcastro.features.screens.home.view.HomeScreen
+import br.com.davidcastro.features.screens.listscreen.model.ListScreenArgs
+import br.com.davidcastro.features.screens.listscreen.model.ListScreenType
+import br.com.davidcastro.features.screens.listscreen.view.PhotoListScreen
 import br.com.davidcastro.features.screens.photodetails.data.PhotoDetailState
 import br.com.davidcastro.features.screens.photodetails.view.PhotoDetailsScreen
-import br.com.davidcastro.features.screens.popular.view.PopularScreen
 import br.com.davidcastro.ui.utils.extensions.getRouteArgs
+import br.com.davidcastro.ui.utils.extensions.navigateWithArgs
 import br.com.davidcastro.ui.widgets.ToolbarWidget
 
 @Composable
@@ -28,36 +30,47 @@ fun AppNavigation(
     Scaffold(
         topBar = {
             ToolbarWidget(
-                canNavigateBack = currentScreenName != Routes.HomeScreen.name,
-                actionButton = {
-                    if(currentScreenName != Routes.HomeScreen.name) {
+                canNavigateBack = currentScreenName != Routes.HomeScreen.route,
+                actionButton = { isBackAction ->
+                    if(isBackAction) {
                         navController.navigateUp()
                     } else {
                         //TODO open menu
                     }
                 },
                 onSearchClick = {
-                    //TODO search
+                    navController.navigateWithArgs(
+                        route = Routes.PhotoListScreen.route,
+                        args = ListScreenArgs(type = ListScreenType.SEARCH, search = it)
+                    )
                 }
             )
                  },
         content = { paddingValues ->
             val modifier = Modifier.padding(paddingValues)
 
-            NavHost(navController = navController, startDestination = Routes.HomeScreen.name ) {
-                composable(Routes.HomeScreen.name) {
+            NavHost(navController = navController, startDestination = Routes.HomeScreen.route) {
+                composable(Routes.HomeScreen.route) {
                     HomeScreen(modifier, navController)
                 }
-                composable(Routes.CuratedScreen.name) {
-                    CuratedScreen(modifier, navController)
+
+                composable(Routes.PhotoListScreen.routeWithArgs) {
+                    val args = it.getRouteArgs("data", ListScreenArgs::class.java)
+                    PhotoListScreen(
+                        modifier = modifier,
+                        navController = navController,
+                        args = args
+                    )
                 }
-                composable("${Routes.PhotoScreen.name}/{photos}") {
-                    val photoDetailState = it.getRouteArgs("photos", PhotoDetailState::class.java)
-                    PhotoDetailsScreen(modifier, photoDetailState)
-                }
-                composable(Routes.PopularScreen.name) {
-                    PopularScreen(modifier, navController)
+
+                composable(Routes.PhotoDetailScreen.routeWithArgs) {
+                    val args = it.getRouteArgs("data", PhotoDetailState::class.java)
+                    PhotoDetailsScreen(
+                        modifier = modifier,
+                        photoDetailState = args
+                    )
                 }
             }
-        })
+        }
+    )
 }

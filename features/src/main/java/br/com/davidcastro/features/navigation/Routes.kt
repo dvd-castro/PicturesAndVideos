@@ -1,8 +1,7 @@
 package br.com.davidcastro.features.navigation
 
-enum class Routes {
-    HomeScreen,
-    CuratedScreen,
-    PhotoScreen,
-    PopularScreen
+enum class Routes(val route: String, val routeWithArgs: String) {
+    HomeScreen("home", ""),
+    PhotoListScreen("photoList", "photoList/{data}"),
+    PhotoDetailScreen("photoDetail", "photoDetail/{data}"),
 }

@@ -1,4 +1,4 @@
-package br.com.davidcastro.features.screens.popular.view
+package br.com.davidcastro.features.screens.listscreen.view
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
@@ -9,40 +9,53 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import br.com.davidcastro.features.navigation.Routes
+import br.com.davidcastro.features.screens.listscreen.model.ListScreenArgs
+import br.com.davidcastro.features.screens.listscreen.model.ListScreenType
+import br.com.davidcastro.features.screens.listscreen.viewmodel.ListViewModel
 import br.com.davidcastro.features.screens.photodetails.data.PhotoDetailState
-import br.com.davidcastro.features.screens.popular.viewmodel.PopularViewModel
 import br.com.davidcastro.ui.utils.extensions.navigateWithArgs
 import br.com.davidcastro.ui.widgets.ImageVerticalListWidget
 import br.com.davidcastro.ui.widgets.LoaderVerticalImageListWidget
 
 @Composable
-fun PopularScreen(
+fun PhotoListScreen(
     modifier: Modifier = Modifier,
+    listViewModel: ListViewModel = hiltViewModel(),
     navController: NavHostController,
-    curatedViewModel: PopularViewModel = hiltViewModel(),
+    args: ListScreenArgs,
 ) {
-    val curatedState by curatedViewModel.popularState.collectAsState()
+    val photoListState by listViewModel.listScreenState.collectAsState()
 
     LaunchedEffect(Unit) {
-        curatedViewModel.getPopularPhotos(1)
+        when(args.type) {
+            ListScreenType.RECOMMENDATION -> {
+                listViewModel.getCuratedPhotos(1)
+            }
+            ListScreenType.POPULAR -> {
+                listViewModel.getPopularPhotos(1)
+            }
+            else -> {
+                //TODO Search
+            }
+        }
     }
 
     Column {
-        if(curatedState.photos.isNotEmpty()) {
+        if(photoListState.photos.isNotEmpty()) {
             ImageVerticalListWidget(
                 modifier = modifier,
-                photos = curatedState.photos,
+                photos = photoListState.photos,
                 loadMore = {
-                    if(!curatedState.hasEnd) {
-                        curatedViewModel.getPopularPhotos(curatedState.nextPage)
+                    if(!photoListState.hasEnd) {
+                        listViewModel.getCuratedPhotos(photoListState.nextPage)
                     }
                 },
                 onItemClick = { selectedIndex ->
                     navController.navigateWithArgs(
-                        Routes.PhotoScreen.name,
+                        Routes.PhotoDetailScreen.route,
                         PhotoDetailState(
                             selectedIndex = selectedIndex,
-                            photos = curatedState.photos.filterIndexed { index, _ ->
+                            photos = photoListState.photos.filterIndexed { index, _ ->
                                 index == selectedIndex || index == selectedIndex + 1 || index == selectedIndex + 2
                             }
                         )
@@ -51,7 +64,7 @@ fun PopularScreen(
             )
         }
 
-        if(curatedState.isLoading && curatedState.nextPage == 1) {
+        if(photoListState.isLoading && photoListState.nextPage == 1) {
             LoaderVerticalImageListWidget(modifier)
         }
     }

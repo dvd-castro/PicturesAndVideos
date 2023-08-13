@@ -17,6 +17,7 @@ interface Api {
 
     @GET("/v1/popular")
     suspend fun getPopularPhotos(
+        @Query("page") page: Int = DEFAULT_PAGE,
         @Query("per_page") perPage: Int = DEFAULT_PER_PAGE
     ): Response<PhotoResponse>
 }

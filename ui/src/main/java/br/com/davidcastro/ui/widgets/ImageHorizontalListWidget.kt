@@ -21,9 +21,9 @@ fun ImageHorizontalListWidget(
         modifier = modifier,
         contentPadding = PaddingValues(8.dp),
     ) {
-        items(photos) { photo ->
+        items(10) {
             RoundedImage(
-                url = photo.src.medium,
+                url = photos[it].src.medium,
                 modifier = Modifier
                     .height(250.dp)
                     .width(150.dp)

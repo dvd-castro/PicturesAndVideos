@@ -11,6 +11,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import br.com.davidcastro.features.navigation.Routes
 import br.com.davidcastro.features.screens.home.viewmodel.HomeViewModel
+import br.com.davidcastro.features.screens.listscreen.model.ListScreenArgs
+import br.com.davidcastro.features.screens.listscreen.model.ListScreenType
+import br.com.davidcastro.ui.utils.extensions.navigateWithArgs
 import br.com.davidcastro.ui.widgets.BannerCarousel
 import br.com.davidcastro.ui.widgets.CollectionWidget
 import br.com.davidcastro.ui.widgets.ImageHorizontalListWidget
@@ -34,16 +37,26 @@ fun HomeScreen(
     ) {
         homeState.bannerState.response?.let {
             BannerCarousel(it) {
-                navController.navigate(Routes.CuratedScreen.name)
+                navController.navigateWithArgs(
+                    route = Routes.PhotoListScreen.route,
+                    args = ListScreenArgs(type = ListScreenType.RECOMMENDATION)
+                )
             }
         }
+
         SessionTitleWidget(text = "Coleções")
         CollectionWidget()
         SessionTitleWidget(text = "Popular")
+
         homeState.popularState.response?.let {
-            ImageHorizontalListWidget(photos = it.photos) {
-                navController.navigate(Routes.PopularScreen.name)
-            }
+            ImageHorizontalListWidget(
+                photos = it.photos,
+                onItemClick = {
+                navController.navigateWithArgs(
+                    route = Routes.PhotoListScreen.route,
+                    args = ListScreenArgs(type = ListScreenType.POPULAR)
+                ) }
+            )
         }
     }
 }

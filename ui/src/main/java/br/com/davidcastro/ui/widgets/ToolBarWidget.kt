@@ -14,7 +14,7 @@ import br.com.davidcastro.ui.theme.Green
 @Composable
 fun ToolbarWidget(
     canNavigateBack: Boolean,
-    actionButton: () -> Unit,
+    actionButton: (isBackAction: Boolean) -> Unit,
     onSearchClick: (text: String) -> Unit) {
 
     CenterAlignedTopAppBar(
@@ -24,7 +24,7 @@ fun ToolbarWidget(
         navigationIcon = {
             if(canNavigateBack) {
                 IconButton(
-                    onClick = { actionButton() }
+                    onClick = { actionButton(true) }
                 ) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
@@ -34,7 +34,7 @@ fun ToolbarWidget(
                 }
             } else {
                 IconButton(
-                    onClick = { actionButton() }
+                    onClick = { actionButton(false) }
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Menu,
