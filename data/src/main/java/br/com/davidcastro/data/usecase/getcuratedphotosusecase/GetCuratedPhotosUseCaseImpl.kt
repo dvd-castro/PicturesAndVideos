@@ -1,14 +1,14 @@
-package br.com.davidcastro.data.usecase
+package br.com.davidcastro.data.usecase.getcuratedphotosusecase
 
 import br.com.davidcastro.data.model.CustomException
 import br.com.davidcastro.data.model.PhotoResponse
 import br.com.davidcastro.data.repository.ApiRepository
 import javax.inject.Inject
 
-class GetPopularPhotosUseCaseImpl @Inject constructor(private val api: ApiRepository): GetPopularPhotosUseCase {
-    override suspend fun getPopularPhotos(page: Int): Result<PhotoResponse?> {
+class GetCuratedPhotosUseCaseImpl @Inject constructor(private val api: ApiRepository): GetCuratedPhotosUseCase {
+    override suspend fun getCuratedPhotos(page: Int): Result<PhotoResponse?> {
         return try {
-            val result = api.getPopularPhotos(page)
+            val result = api.getCuratedPhotos(page)
 
             if(result.isSuccessful) {
                 Result.success(result.body())

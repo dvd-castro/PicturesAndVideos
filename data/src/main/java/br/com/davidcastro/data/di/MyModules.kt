@@ -4,10 +4,12 @@ import br.com.davidcastro.data.api.Api
 import br.com.davidcastro.data.api.RetrofitClient
 import br.com.davidcastro.data.repository.ApiRepository
 import br.com.davidcastro.data.repository.ApiRepositoryImpl
-import br.com.davidcastro.data.usecase.GetCuratedPhotosUseCase
-import br.com.davidcastro.data.usecase.GetCuratedPhotosUseCaseImpl
-import br.com.davidcastro.data.usecase.GetPopularPhotosUseCase
-import br.com.davidcastro.data.usecase.GetPopularPhotosUseCaseImpl
+import br.com.davidcastro.data.usecase.getcuratedphotosusecase.GetCuratedPhotosUseCase
+import br.com.davidcastro.data.usecase.getcuratedphotosusecase.GetCuratedPhotosUseCaseImpl
+import br.com.davidcastro.data.usecase.getpopularphotosusecase.GetPopularPhotosUseCase
+import br.com.davidcastro.data.usecase.getpopularphotosusecase.GetPopularPhotosUseCaseImpl
+import br.com.davidcastro.data.usecase.getsearchphotosusecase.GetSearchPhotosUseCase
+import br.com.davidcastro.data.usecase.getsearchphotosusecase.GetSearchPhotosUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,4 +45,11 @@ class MyModule {
         repository: ApiRepository
     ): GetPopularPhotosUseCase =
         GetPopularPhotosUseCaseImpl(repository)
+
+    @Singleton
+    @Provides
+    fun provideGetSearchPhotoUseCase(
+        repository: ApiRepository
+    ): GetSearchPhotosUseCase =
+        GetSearchPhotosUseCaseImpl(repository)
 }

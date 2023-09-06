@@ -61,7 +61,7 @@ fun PhotoDetailsScreen(
         val (mainPhoto, photoList, bottomOptions) = createRefs()
 
         MainPicture(
-            photo = photoDetailState.photos[selectedIndex],
+            url = photoDetailState.photos[selectedIndex].src.original,
             modifier = Modifier.constrainAs(mainPhoto) {
                 top.linkTo(parent.top)
                 bottom.linkTo(bottomOptions.top)
@@ -97,10 +97,10 @@ fun PhotoDetailsScreen(
 @Composable
 private fun MainPicture(
     modifier: Modifier = Modifier,
-    photo: Photo
+    url: String
 ) {
     AsyncImage(
-        model = photo.src.original,
+        model = url,
         contentDescription = null,
         modifier = modifier,
         contentScale = ContentScale.Crop

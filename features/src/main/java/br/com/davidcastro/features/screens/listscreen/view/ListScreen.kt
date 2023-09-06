@@ -17,6 +17,8 @@ import br.com.davidcastro.ui.utils.extensions.navigateWithArgs
 import br.com.davidcastro.ui.widgets.ImageVerticalListWidget
 import br.com.davidcastro.ui.widgets.LoaderVerticalImageListWidget
 
+private const val INITIAL_PAGE = 1
+
 @Composable
 fun PhotoListScreen(
     modifier: Modifier = Modifier,
@@ -29,13 +31,13 @@ fun PhotoListScreen(
     LaunchedEffect(Unit) {
         when(args.type) {
             ListScreenType.RECOMMENDATION -> {
-                listViewModel.getCuratedPhotos(1)
+                listViewModel.getCuratedPhotos(INITIAL_PAGE)
             }
             ListScreenType.POPULAR -> {
-                listViewModel.getPopularPhotos(1)
+                listViewModel.getPopularPhotos(INITIAL_PAGE)
             }
             else -> {
-                //TODO Search
+                listViewModel.getSearchPhotos(args.search, INITIAL_PAGE)
             }
         }
     }
@@ -64,7 +66,7 @@ fun PhotoListScreen(
             )
         }
 
-        if(photoListState.isLoading && photoListState.nextPage == 1) {
+        if(photoListState.isLoading && photoListState.nextPage == INITIAL_PAGE) {
             LoaderVerticalImageListWidget(modifier)
         }
     }

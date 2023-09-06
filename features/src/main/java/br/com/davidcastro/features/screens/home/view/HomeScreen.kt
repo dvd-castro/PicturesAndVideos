@@ -19,6 +19,8 @@ import br.com.davidcastro.ui.widgets.CollectionWidget
 import br.com.davidcastro.ui.widgets.ImageHorizontalListWidget
 import br.com.davidcastro.ui.widgets.SessionTitleWidget
 
+private const val INITIAL_PAGE = 1
+
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
@@ -28,8 +30,8 @@ fun HomeScreen(
     val homeState by homeViewModel.homeState.collectAsState()
 
     LaunchedEffect(Unit) {
-        homeViewModel.getCuratedBannerPhotos(1)
-        homeViewModel.getPopularPhotos(1)
+        homeViewModel.getCuratedBannerPhotos(INITIAL_PAGE)
+        homeViewModel.getPopularPhotos(INITIAL_PAGE)
     }
 
     Column(

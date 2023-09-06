@@ -3,8 +3,8 @@ package br.com.davidcastro.features.screens.home.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.davidcastro.data.model.PhotoResponse
-import br.com.davidcastro.data.usecase.GetCuratedPhotosUseCase
-import br.com.davidcastro.data.usecase.GetPopularPhotosUseCase
+import br.com.davidcastro.data.usecase.getcuratedphotosusecase.GetCuratedPhotosUseCase
+import br.com.davidcastro.data.usecase.getpopularphotosusecase.GetPopularPhotosUseCase
 import br.com.davidcastro.features.screens.home.model.state.BannerState
 import br.com.davidcastro.features.screens.home.model.state.HomeState
 import br.com.davidcastro.features.screens.home.model.state.PopularState
