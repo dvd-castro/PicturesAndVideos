@@ -1,5 +1,6 @@
 package br.com.davidcastro.data.di
 
+import br.com.davidcastro.data.BuildConfig
 import br.com.davidcastro.data.api.Api
 import br.com.davidcastro.data.api.RetrofitClient
 import br.com.davidcastro.data.repository.ApiRepository
@@ -23,7 +24,7 @@ class MyModule {
     @Singleton
     @Provides
     fun provideApi(): Api =
-        RetrofitClient.getRetrofitInstance(Api::class.java, "https://api.pexels.com/")
+        RetrofitClient.getRetrofitInstance(Api::class.java, BuildConfig.BASE_URL)
 
     @Singleton
     @Provides
