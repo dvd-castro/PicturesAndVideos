@@ -3,14 +3,12 @@ package br.com.davidcastro.features.screens.photodetails.view
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -18,16 +16,13 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Download
-import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.PhoneAndroid
 import androidx.compose.material.icons.outlined.Share
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -36,18 +31,26 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import br.com.davidcastro.data.model.Photo
 import br.com.davidcastro.features.screens.photodetails.data.PhotoDetailState
+import br.com.davidcastro.ui.R
+import br.com.davidcastro.ui.theme.Dimens.dimen120dp
+import br.com.davidcastro.ui.theme.Dimens.dimen16dp
+import br.com.davidcastro.ui.theme.Dimens.dimen2dp
+import br.com.davidcastro.ui.theme.Dimens.dimen4dp
+import br.com.davidcastro.ui.theme.Dimens.dimen80dp
+import br.com.davidcastro.ui.theme.Dimens.dimen8dp
 import br.com.davidcastro.ui.theme.Green
 import br.com.davidcastro.ui.theme.TopAppBarBackground
+import br.com.davidcastro.ui.widgets.BottomOption
 import br.com.davidcastro.ui.widgets.RoundedImage
-import coil.compose.AsyncImage
+import br.com.davidcastro.ui.widgets.SessionTitleWidget
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 
 @Composable
 fun PhotoDetailsScreen(
@@ -55,7 +58,7 @@ fun PhotoDetailsScreen(
     photoDetailState: PhotoDetailState
 ) {
 
-    var selectedIndex by rememberSaveable { mutableStateOf(0) }
+    var selectedIndex by rememberSaveable { mutableIntStateOf(0) }
 
     ConstraintLayout(modifier.fillMaxSize()) {
         val (mainPhoto, photoList, bottomOptions) = createRefs()
@@ -94,16 +97,17 @@ fun PhotoDetailsScreen(
     }
 }
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 private fun MainPicture(
     modifier: Modifier = Modifier,
     url: String
 ) {
-    AsyncImage(
+    GlideImage(
         model = url,
         contentDescription = null,
         modifier = modifier,
-        contentScale = ContentScale.Crop
+        contentScale = ContentScale.Crop,
     )
 }
 
@@ -114,31 +118,33 @@ private fun PhotoPreviewList(
     photoList: List<Photo>,
     onSelectPhoto: (index: Int) -> Unit,
 ) {
-    LazyRow(modifier.padding(bottom = 16.dp)) {
+    LazyRow(modifier.padding(bottom = dimen16dp)) {
         items(photoList) {
             if (selectedIndex == photoList.indexOf(it)) {
                 RectangleWithBorder(
                     borderColor = Green,
-                    borderWidth = 2.dp,
-                    shape = AbsoluteRoundedCornerShape(16.dp),
-                    modifier = Modifier.padding(4.dp)
+                    borderWidth = dimen2dp,
+                    shape = AbsoluteRoundedCornerShape(dimen16dp),
+                    modifier = Modifier.padding(dimen4dp)
 
                 ) {
                     RoundedImage(
                         url = it.src.medium,
+                        color = it.avgColor,
                         modifier = modifier
-                            .padding(4.dp)
-                            .height(120.dp)
-                            .width(80.dp),
+                            .padding(dimen4dp)
+                            .height(dimen120dp)
+                            .width(dimen80dp),
                     ) {}
                 }
             } else {
                 RoundedImage(
                     url = it.src.medium,
+                    color = it.avgColor,
                     modifier = modifier
-                        .padding(4.dp)
-                        .height(120.dp)
-                        .width(80.dp),
+                        .padding(dimen4dp)
+                        .height(dimen120dp)
+                        .width(dimen80dp),
                 ) {
                     onSelectPhoto(photoList.indexOf(it))
                 }
@@ -176,126 +182,49 @@ private fun BottomOptions(
     Surface(
         modifier = modifier,
         color = TopAppBarBackground,
-        shape = AbsoluteRoundedCornerShape(topLeft = 16.dp, topRight = 16.dp)
+        shape = AbsoluteRoundedCornerShape(topLeft = dimen16dp, topRight = dimen16dp)
     ) {
         val scrollState = rememberScrollState()
         Column {
-            Text(
-                text = "By: ${selectedPhoto.photographer}",
-                modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp)
+            SessionTitleWidget(
+                text = stringResource(id = R.string.title_by, selectedPhoto.photographer),
+                modifier =  Modifier.padding(start = dimen16dp, top = dimen16dp, end = dimen16dp)
             )
-            Text(
-                text = "Tamanho original: ${selectedPhoto.height} x ${selectedPhoto.width}",
-                Modifier.padding(start = 16.dp, top = 8.dp, end = 16.dp)
+            SessionTitleWidget(
+                text = stringResource(id = R.string.title_original_size, selectedPhoto.height,selectedPhoto.width),
+                modifier = Modifier.padding(start = dimen16dp, top = dimen8dp, end = dimen16dp)
             )
             Row(
                 Modifier
-                    .padding(16.dp)
+                    .padding(dimen16dp)
                     .horizontalScroll(scrollState)
             ) {
-                Column(
-                    modifier = Modifier.width(100.dp),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
+                BottomOption(
+                    text = stringResource(id = R.string.option_set_wallpaper),
+                    icon = Icons.Outlined.PhoneAndroid
                 ) {
-                    Icon(
-                        imageVector = Icons.Outlined.FavoriteBorder,
-                        tint = Green,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(28.dp)
-                            .padding(bottom = 4.dp)
-                    )
-                    Text(
-                        text = "Favoritar",
-                        fontSize = 14.sp,
-                        textAlign = TextAlign.Center,
-                        lineHeight = 18.sp
-                    )
+
                 }
 
-                Column(
-                    modifier = Modifier.width(100.dp),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
+                BottomOption(
+                    text = stringResource(id = R.string.option_set_lock_screen),
+                    icon = Icons.Outlined.Lock
                 ) {
-                    Icon(
-                        imageVector = Icons.Outlined.PhoneAndroid,
-                        tint = Green,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(28.dp)
-                            .padding(bottom = 4.dp)
-                    )
-                    Text(
-                        text = "Definir como tela de fundo",
-                        fontSize = 14.sp,
-                        textAlign = TextAlign.Center,
-                        lineHeight = 18.sp
-                    )
+
                 }
 
-                Column(
-                    modifier = Modifier.width(100.dp),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
+                BottomOption(
+                    text = stringResource(id = R.string.option_download),
+                    icon = Icons.Outlined.Download
                 ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Lock,
-                        tint = Green,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(28.dp)
-                            .padding(bottom = 4.dp)
-                    )
-                    Text(
-                        text = "Definir como tela de bloqueio",
-                        fontSize = 14.sp,
-                        textAlign = TextAlign.Center,
-                        lineHeight = 18.sp
-                    )
+
                 }
 
-                Column(
-                    modifier = Modifier.width(100.dp),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
+                BottomOption(
+                    text = stringResource(id = R.string.option_share),
+                    icon = Icons.Outlined.Share
                 ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Download,
-                        tint = Green,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(28.dp)
-                            .padding(bottom = 4.dp)
-                    )
-                    Text(
-                        text = "Download",
-                        fontSize = 14.sp,
-                        textAlign = TextAlign.Center,
-                        lineHeight = 18.sp
-                    )
-                }
 
-                Column(
-                    modifier = Modifier.width(100.dp),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Share,
-                        tint = Green,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(28.dp)
-                            .padding(bottom = 4.dp)
-                    )
-                    Text(
-                        text = "Compartilhar",
-                        fontSize = 14.sp,
-                        textAlign = TextAlign.Center,
-                        lineHeight = 18.sp
-                    )
                 }
             }
         }

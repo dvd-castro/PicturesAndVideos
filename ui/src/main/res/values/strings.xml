@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="search_placeholder">Pesquisar…</string>
+    <string name="session_title_collections">"Coleções"</string>
+    <string name="session_title_popular">Populares</string>
+    <string name="title_by">By: %s</string>
+    <string name="title_original_size">Tamanho original: %s x %s</string>
+    <string name="title_recommendations">"Recomendações"</string>
+    <string name="option_set_wallpaper">Definir como tela de fundo</string>
+    <string name="option_set_lock_screen">Definir como tela de bloqueio</string>
+    <string name="option_download">Download</string>
+    <string name="option_share">Compartilhar</string>
+
 
     <!--Descriptions-->
     <string name="description_icon_search">Botão de pesquisar</string>

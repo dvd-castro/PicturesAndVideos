@@ -2,17 +2,21 @@ package br.com.davidcastro.features.screens.home.view
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import br.com.davidcastro.features.navigation.Routes
 import br.com.davidcastro.features.screens.home.viewmodel.HomeViewModel
 import br.com.davidcastro.features.screens.listscreen.model.ListScreenArgs
 import br.com.davidcastro.features.screens.listscreen.model.ListScreenType
+import br.com.davidcastro.ui.R
+import br.com.davidcastro.ui.theme.Dimens.dimen16dp
 import br.com.davidcastro.ui.utils.extensions.navigateWithArgs
 import br.com.davidcastro.ui.widgets.BannerCarousel
 import br.com.davidcastro.ui.widgets.CollectionWidget
@@ -46,11 +50,10 @@ fun HomeScreen(
             }
         }
 
-        SessionTitleWidget(text = "Coleções")
-        CollectionWidget()
-        SessionTitleWidget(text = "Popular")
-
         homeState.popularState.response?.let {
+            SessionTitleWidget(text = stringResource(id = R.string.session_title_collections), Modifier.padding(dimen16dp))
+            CollectionWidget()
+            SessionTitleWidget(text = stringResource(id = R.string.session_title_popular), Modifier.padding(dimen16dp))
             ImageHorizontalListWidget(
                 photos = it.photos,
                 onItemClick = {

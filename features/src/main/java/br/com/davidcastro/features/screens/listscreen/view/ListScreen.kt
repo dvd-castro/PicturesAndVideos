@@ -28,18 +28,22 @@ fun PhotoListScreen(
 ) {
     val photoListState by listViewModel.listScreenState.collectAsState()
 
-    LaunchedEffect(Unit) {
+    fun getMore() {
         when(args.type) {
             ListScreenType.RECOMMENDATION -> {
-                listViewModel.getCuratedPhotos(INITIAL_PAGE)
+                listViewModel.getCuratedPhotos(photoListState.nextPage)
             }
             ListScreenType.POPULAR -> {
-                listViewModel.getPopularPhotos(INITIAL_PAGE)
+                listViewModel.getPopularPhotos(photoListState.nextPage)
             }
             else -> {
-                listViewModel.getSearchPhotos(args.search, INITIAL_PAGE)
+                listViewModel.getSearchPhotos(args.search, photoListState.nextPage)
             }
         }
+    }
+
+    LaunchedEffect(Unit) {
+        getMore()
     }
 
     Column {
@@ -49,7 +53,7 @@ fun PhotoListScreen(
                 photos = photoListState.photos,
                 loadMore = {
                     if(!photoListState.hasEnd) {
-                        listViewModel.getCuratedPhotos(photoListState.nextPage)
+                        getMore()
                     }
                 },
                 onItemClick = { selectedIndex ->

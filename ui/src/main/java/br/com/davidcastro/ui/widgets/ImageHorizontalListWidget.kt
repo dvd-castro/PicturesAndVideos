@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -24,6 +23,7 @@ fun ImageHorizontalListWidget(
         items(10) {
             RoundedImage(
                 url = photos[it].src.medium,
+                color = photos[it].avgColor,
                 modifier = Modifier
                     .height(250.dp)
                     .width(150.dp)

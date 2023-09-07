@@ -10,8 +10,9 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import br.com.davidcastro.data.model.Photo
+import br.com.davidcastro.ui.theme.Dimens.dimen250dp
+import br.com.davidcastro.ui.theme.Dimens.dimen8dp
 
 @Composable
 fun ImageVerticalListWidget(
@@ -25,7 +26,7 @@ fun ImageVerticalListWidget(
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = modifier,
-        contentPadding = PaddingValues(8.dp),
+        contentPadding = PaddingValues(dimen8dp),
         state = listState
     ) {
         items(photos) { photo ->
@@ -37,9 +38,10 @@ fun ImageVerticalListWidget(
                 } else {
                     RoundedImage(
                         url = photo.src.medium,
+                        color = photo.avgColor,
                         modifier = Modifier
-                            .height(250.dp)
-                            .padding(8.dp)
+                            .height(dimen250dp)
+                            .padding(dimen8dp)
                     ) {
                         onItemClick(photos.indexOf(photo))
                     }
