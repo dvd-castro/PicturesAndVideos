@@ -44,7 +44,7 @@ fun BannerCarousel(
 ) {
     val list = response.photos
     val pageCount = 5
-    val pagerState = rememberPagerState() {
+    val pagerState = rememberPagerState {
        pageCount
     }
 
