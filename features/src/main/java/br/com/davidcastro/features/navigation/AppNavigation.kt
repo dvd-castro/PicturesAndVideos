@@ -16,9 +16,12 @@ import br.com.davidcastro.features.screens.listscreen.model.ListScreenType
 import br.com.davidcastro.features.screens.listscreen.view.PhotoListScreen
 import br.com.davidcastro.features.screens.photodetails.data.PhotoDetailState
 import br.com.davidcastro.features.screens.photodetails.view.PhotoDetailsScreen
+import br.com.davidcastro.ui.theme.ScreenBackground
 import br.com.davidcastro.ui.utils.extensions.getRouteArgs
 import br.com.davidcastro.ui.utils.extensions.navigateWithArgs
 import br.com.davidcastro.ui.widgets.ToolbarWidget
+
+private const val DATA = "data"
 
 @Composable
 fun AppNavigation(
@@ -28,6 +31,7 @@ fun AppNavigation(
     val currentScreenName = backStackEntry?.destination?.route ?: Routes.HomeScreen.name
 
     Scaffold(
+        containerColor = ScreenBackground,
         topBar = {
             ToolbarWidget(
                 canNavigateBack = currentScreenName != Routes.HomeScreen.route,
@@ -55,7 +59,7 @@ fun AppNavigation(
                 }
 
                 composable(Routes.PhotoListScreen.routeWithArgs) {
-                    val args = it.getRouteArgs("data", ListScreenArgs::class.java)
+                    val args = it.getRouteArgs(DATA, ListScreenArgs::class.java)
                     PhotoListScreen(
                         modifier = modifier,
                         navController = navController,
@@ -64,7 +68,7 @@ fun AppNavigation(
                 }
 
                 composable(Routes.PhotoDetailScreen.routeWithArgs) {
-                    val args = it.getRouteArgs("data", PhotoDetailState::class.java)
+                    val args = it.getRouteArgs(DATA, PhotoDetailState::class.java)
                     PhotoDetailsScreen(
                         modifier = modifier,
                         photoDetailState = args
