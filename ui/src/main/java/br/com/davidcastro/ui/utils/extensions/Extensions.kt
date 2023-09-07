@@ -17,7 +17,7 @@ fun <T> NavHostController.navigateWithArgs(route: String, args: T) {
 }
 
 @Composable
-fun Boolean?.doIfTrue( action: @Composable () -> Unit ): Boolean {
+fun Boolean?.doIfTrue(action: @Composable () -> Unit): Boolean {
     return when(this) {
         true -> {
             action()
@@ -30,7 +30,7 @@ fun Boolean?.doIfTrue( action: @Composable () -> Unit ): Boolean {
 }
 
 @Composable
-fun Boolean?.doIfFalse( action: @Composable () -> Unit ) {
+fun Boolean?.doIfFalse(action: @Composable () -> Unit) {
     if(this == false) {
         action()
     }
