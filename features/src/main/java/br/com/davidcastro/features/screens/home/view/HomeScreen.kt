@@ -17,6 +17,8 @@ import br.com.davidcastro.features.screens.listscreen.model.ListScreenArgs
 import br.com.davidcastro.features.screens.listscreen.model.ListScreenType
 import br.com.davidcastro.ui.R
 import br.com.davidcastro.ui.theme.Dimens.dimen16dp
+import br.com.davidcastro.ui.utils.extensions.doIfFalse
+import br.com.davidcastro.ui.utils.extensions.doIfTrue
 import br.com.davidcastro.ui.utils.extensions.navigateWithArgs
 import br.com.davidcastro.ui.widgets.BannerCarousel
 import br.com.davidcastro.ui.widgets.CollectionWidget
@@ -34,34 +36,40 @@ fun HomeScreen(
     val homeState by homeViewModel.homeState.collectAsState()
 
     LaunchedEffect(Unit) {
-        homeViewModel.getCuratedBannerPhotos(INITIAL_PAGE)
-        homeViewModel.getPopularPhotos(INITIAL_PAGE)
+        if(homeState.popularResponse == null && homeState.bannerResponse == null) {
+            homeViewModel.getCuratedBannerPhotos(INITIAL_PAGE)
+        }
     }
 
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
-        homeState.bannerState.response?.let {
-            BannerCarousel(it) {
-                navController.navigateWithArgs(
-                    route = Routes.PhotoListScreen.route,
-                    args = ListScreenArgs(type = ListScreenType.RECOMMENDATION)
+        homeState.hasLoading.doIfTrue {
+
+        }.doIfFalse {
+            homeState.bannerResponse?.let {
+                BannerCarousel(it) {
+                    navController.navigateWithArgs(
+                        route = Routes.PhotoListScreen.route,
+                        args = ListScreenArgs(type = ListScreenType.RECOMMENDATION)
+                    )
+                }
+            }
+
+            homeState.popularResponse?.let {
+                SessionTitleWidget(text = stringResource(id = R.string.session_title_collections), Modifier.padding(dimen16dp))
+                CollectionWidget()
+                SessionTitleWidget(text = stringResource(id = R.string.session_title_popular), Modifier.padding(dimen16dp))
+                ImageHorizontalListWidget(
+                    photos = it.photos,
+                    onItemClick = {
+                        navController.navigateWithArgs(
+                            route = Routes.PhotoListScreen.route,
+                            args = ListScreenArgs(type = ListScreenType.POPULAR)
+                        )
+                    }
                 )
             }
-        }
-
-        homeState.popularState.response?.let {
-            SessionTitleWidget(text = stringResource(id = R.string.session_title_collections), Modifier.padding(dimen16dp))
-            CollectionWidget()
-            SessionTitleWidget(text = stringResource(id = R.string.session_title_popular), Modifier.padding(dimen16dp))
-            ImageHorizontalListWidget(
-                photos = it.photos,
-                onItemClick = {
-                navController.navigateWithArgs(
-                    route = Routes.PhotoListScreen.route,
-                    args = ListScreenArgs(type = ListScreenType.POPULAR)
-                ) }
-            )
         }
     }
 }
