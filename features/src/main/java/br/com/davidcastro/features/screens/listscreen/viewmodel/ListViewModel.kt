@@ -25,19 +25,19 @@ class ListViewModel @Inject constructor(
 
     fun getCuratedPhotos(page: Int) = viewModelScope.launch {
         showLoad(true)
-        val result = getCuratedPhotosUseCase.getCuratedPhotos(page)
+        val result = getCuratedPhotosUseCase(page)
         updatePhotoListStateOnSuccess(result)
     }
 
     fun getPopularPhotos(page: Int) = viewModelScope.launch {
         showLoad(true)
-        val result = getPopularPhotosUseCase.getPopularPhotos(page)
+        val result = getPopularPhotosUseCase(page)
         updatePhotoListStateOnSuccess(result)
     }
 
     fun getSearchPhotos(query: String, page: Int) = viewModelScope.launch {
         showLoad(true)
-        val result = getSearchPhotosUseCase.getSearchPhotos(query, page)
+        val result = getSearchPhotosUseCase(query, page)
         updatePhotoListStateOnSuccess(result)
     }
 

@@ -6,7 +6,7 @@ import br.com.davidcastro.data.repository.ApiRepository
 import javax.inject.Inject
 
 class GetCuratedPhotosUseCaseImpl @Inject constructor(private val api: ApiRepository): GetCuratedPhotosUseCase {
-    override suspend fun getCuratedPhotos(page: Int): Result<PhotoResponse?> {
+    override suspend fun invoke(page: Int): Result<PhotoResponse?> {
         return try {
             val result = api.getCuratedPhotos(page)
 

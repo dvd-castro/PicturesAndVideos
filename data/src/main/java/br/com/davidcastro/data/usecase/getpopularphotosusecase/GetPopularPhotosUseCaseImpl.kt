@@ -6,7 +6,7 @@ import br.com.davidcastro.data.repository.ApiRepository
 import javax.inject.Inject
 
 class GetPopularPhotosUseCaseImpl @Inject constructor(private val api: ApiRepository): GetPopularPhotosUseCase {
-    override suspend fun getPopularPhotos(page: Int): Result<PhotoResponse?> {
+    override suspend fun invoke(page: Int): Result<PhotoResponse?> {
         return try {
             val result = api.getPopularPhotos(page)
 

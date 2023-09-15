@@ -3,6 +3,8 @@ package br.com.davidcastro.features.screens.home.view
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -34,6 +36,7 @@ fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel(),
 ) {
     val homeState by homeViewModel.homeState.collectAsState()
+    val scrollState = rememberScrollState()
 
     LaunchedEffect(Unit) {
         if(homeState.popularResponse == null && homeState.bannerResponse == null) {
@@ -42,7 +45,9 @@ fun HomeScreen(
     }
 
     Column(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
+            .verticalScroll(scrollState)
     ) {
         homeState.hasLoading.doIfTrue {
 

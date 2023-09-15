@@ -3,5 +3,5 @@ package br.com.davidcastro.data.usecase.getpopularphotosusecase
 import br.com.davidcastro.data.model.PhotoResponse
 
 interface GetPopularPhotosUseCase {
-    suspend fun getPopularPhotos(page: Int): Result<PhotoResponse?>
+    suspend operator fun invoke(page: Int): Result<PhotoResponse?>
 }

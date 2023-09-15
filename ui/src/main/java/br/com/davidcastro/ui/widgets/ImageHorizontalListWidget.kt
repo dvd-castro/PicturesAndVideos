@@ -25,7 +25,7 @@ fun ImageHorizontalListWidget(
                 url = photos[it].src.medium,
                 color = photos[it].avgColor,
                 modifier = Modifier
-                    .height(250.dp)
+                    .height(200.dp)
                     .width(150.dp)
                     .padding(horizontal = 8.dp)
             ) {

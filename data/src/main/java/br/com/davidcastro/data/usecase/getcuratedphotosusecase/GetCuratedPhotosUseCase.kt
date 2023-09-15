@@ -3,5 +3,5 @@ package br.com.davidcastro.data.usecase.getcuratedphotosusecase
 import br.com.davidcastro.data.model.PhotoResponse
 
 interface GetCuratedPhotosUseCase {
-    suspend fun getCuratedPhotos(page: Int): Result<PhotoResponse?>
+    suspend operator fun invoke(page: Int): Result<PhotoResponse?>
 }

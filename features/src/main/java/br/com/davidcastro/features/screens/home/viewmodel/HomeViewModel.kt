@@ -23,7 +23,7 @@ class HomeViewModel @Inject constructor(
 
     fun getCuratedBannerPhotos(page: Int) = viewModelScope.launch {
         updateHomeState(hasLoading = true)
-        getCuratedPhotosUseCase.getCuratedPhotos(page)
+        getCuratedPhotosUseCase(page)
             .onSuccess {
                 updateHomeState(bannerResponse = it)
                 getPopularPhotos(page)
@@ -35,14 +35,13 @@ class HomeViewModel @Inject constructor(
 
     fun getPopularPhotos(page: Int) {
         viewModelScope.launch {
-            getPopularPhotosUseCase.getPopularPhotos(page)
+            getPopularPhotosUseCase(page)
                 .onSuccess {
                     updateHomeState(popularResponse = it)
                 }
                 .onFailure {
                     updateHomeState(hasError = true)
                 }
-
             updateHomeState(hasLoading = false)
         }
     }
