@@ -49,7 +49,11 @@ class ListViewModel @Inject constructor(
                     photos.addAll(it.photos)
                     _listScreenState.value = listScreenState.value.copy(photos = photos, nextPage = it.page + 1)
                 } else {
-                    _listScreenState.value = listScreenState.value.copy(hasEnd = true)
+                    if(it.page == 1) {
+                        _listScreenState.value = listScreenState.value.copy(hasEnd = true, resultNotFound = true)
+                    } else {
+                        _listScreenState.value = listScreenState.value.copy(hasEnd = true)
+                    }
                 }
             }
             showLoad(false)
