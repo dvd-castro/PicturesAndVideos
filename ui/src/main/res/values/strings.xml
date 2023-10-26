@@ -10,8 +10,13 @@
     <string name="option_set_lock_screen">Definir como tela de bloqueio</string>
     <string name="option_download">Download</string>
     <string name="option_share">Compartilhar</string>
-
-
+    <string name="option_view_in_full_screen">Ver em tela cheia</string>
+    <string name="set_wallpaper_successful">Definido como tela de fundo</string>
+    <string name="set_wallpaper_lockscreen_successful">Definido como tela de bloqueio</string>
+    <string name="share_image"> Compartilhar imagem</string>
+    <string name="cache_dir">images</string>
+    <string name="file_name">%s-image.png</string>
+    <string name="download_title">"Baixando imagem...</string>
     <!--Descriptions-->
     <string name="description_icon_search">Botão de pesquisar</string>
 

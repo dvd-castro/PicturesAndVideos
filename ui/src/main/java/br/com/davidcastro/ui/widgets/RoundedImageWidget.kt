@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import br.com.davidcastro.ui.theme.Dimens.dimen16dp
 import br.com.davidcastro.ui.utils.extensions.toShapeDrawable
@@ -20,6 +21,7 @@ fun RoundedImage(
     modifier: Modifier = Modifier,
     url: String,
     color: String,
+    roundedCorner: Dp = dimen16dp,
     onClick: () -> Unit
 ) {
     GlideImage(
@@ -29,7 +31,7 @@ fun RoundedImage(
         loading = placeholder(color.toShapeDrawable()),
         modifier = modifier
             .padding(0.dp)
-            .clip(AbsoluteRoundedCornerShape(dimen16dp))
+            .clip(AbsoluteRoundedCornerShape(roundedCorner))
             .clickable {
                 onClick()
             }

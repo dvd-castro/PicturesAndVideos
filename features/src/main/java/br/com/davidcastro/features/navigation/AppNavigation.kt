@@ -14,7 +14,7 @@ import br.com.davidcastro.features.screens.home.view.HomeScreen
 import br.com.davidcastro.features.screens.listscreen.model.ListScreenArgs
 import br.com.davidcastro.features.screens.listscreen.model.ListScreenType
 import br.com.davidcastro.features.screens.listscreen.view.PhotoListScreen
-import br.com.davidcastro.features.screens.photodetails.data.PhotoDetailState
+import br.com.davidcastro.features.screens.photodetails.data.PhotoDetail
 import br.com.davidcastro.features.screens.photodetails.view.PhotoDetailsScreen
 import br.com.davidcastro.ui.theme.ScreenBackground
 import br.com.davidcastro.ui.utils.extensions.getRouteArgs
@@ -68,10 +68,10 @@ fun AppNavigation(
                 }
 
                 composable(Routes.PhotoDetailScreen.routeWithArgs) {
-                    val args = it.getRouteArgs(DATA, PhotoDetailState::class.java)
+                    val args = it.getRouteArgs(DATA, PhotoDetail::class.java)
                     PhotoDetailsScreen(
                         modifier = modifier,
-                        photoDetailState = args
+                        photoDetail = args
                     )
                 }
             }
