@@ -68,16 +68,23 @@ fun HomeScreen(
                 SessionTitleWidget(text = stringResource(id = R.string.session_title_popular), Modifier.padding(dimen16dp))
                 ImageHorizontalListWidget(
                     photos = it.photos,
-                    onItemClick = { selectedIndex ->
-                        navController.navigateWithArgs(
-                            route = Routes.PhotoDetailScreen.route,
-                            args = PhotoDetailState(
-                                selectedIndex = selectedIndex,
-                                photos = it.photos.filterIndexed { index, _ ->
-                                    index == selectedIndex || index == selectedIndex + 1 || index == selectedIndex + 2
-                                }
+                    onItemClick = { selectedIndex, goToDetails ->
+                        if(goToDetails) {
+                            navController.navigateWithArgs(
+                                route = Routes.PhotoDetailScreen.route,
+                                args = PhotoDetailState(
+                                    selectedIndex = selectedIndex,
+                                    photos = it.photos.filterIndexed { index, _ ->
+                                        index == selectedIndex || index == selectedIndex + 1 || index == selectedIndex + 2
+                                    }
+                                )
                             )
-                        )
+                        } else {
+                            navController.navigateWithArgs(
+                                route = Routes.PhotoListScreen.route,
+                                args = ListScreenArgs(type = ListScreenType.POPULAR)
+                            )
+                        }
                     }
                 )
             }

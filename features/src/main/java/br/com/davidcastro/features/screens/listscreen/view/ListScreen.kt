@@ -1,6 +1,6 @@
 package br.com.davidcastro.features.screens.listscreen.view
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
@@ -10,6 +10,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import br.com.davidcastro.features.navigation.Routes
@@ -18,6 +20,7 @@ import br.com.davidcastro.features.screens.listscreen.model.ListScreenType
 import br.com.davidcastro.features.screens.listscreen.state.ListScreenState
 import br.com.davidcastro.features.screens.listscreen.viewmodel.ListViewModel
 import br.com.davidcastro.features.screens.photodetails.data.PhotoDetailState
+import br.com.davidcastro.ui.R
 import br.com.davidcastro.ui.utils.extensions.navigateWithArgs
 import br.com.davidcastro.ui.widgets.ImageVerticalListWidget
 import br.com.davidcastro.ui.widgets.LoaderVerticalImageListWidget
@@ -106,10 +109,14 @@ fun PhotoListScreen(
 fun NotFoundError(
     modifier: Modifier
 ) {
-    Box(
+    Column(
         modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Nenhum resultado encontrado!")
+        Text(
+            text = stringResource(id = R.string.not_found),
+            color = Color.White
+        )
     }
 }

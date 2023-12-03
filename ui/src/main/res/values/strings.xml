@@ -17,6 +17,7 @@
     <string name="cache_dir">images</string>
     <string name="file_name">%s-image.png</string>
     <string name="download_title">Baixando imagem...</string>
+    <string name="not_found">"Nenhum resultado encontrado!"</string>
     <!--Descriptions-->
     <string name="description_icon_search">Botão de pesquisar</string>
 

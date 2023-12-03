@@ -20,7 +20,7 @@ import br.com.davidcastro.ui.theme.Green
 fun ImageHorizontalListWidget(
     modifier: Modifier = Modifier,
     photos: List<Photo>,
-    onItemClick: (selectedIndex: Int) -> Unit
+    onItemClick: (selectedIndex: Int, goToDetails: Boolean) -> Unit
 ) {
     LazyRow(
         modifier = modifier,
@@ -36,7 +36,7 @@ fun ImageHorizontalListWidget(
                     .width(150.dp)
                     .padding(horizontal = dimen8dp)
             ) {
-                onItemClick(it)
+                onItemClick(it, true)
             }
         }
 
@@ -47,7 +47,7 @@ fun ImageHorizontalListWidget(
                 modifier = Modifier
                     .padding(dimen16dp)
                     .clickable {
-                        onItemClick(11)
+                        onItemClick(0, false)
                     }
             )
         }
