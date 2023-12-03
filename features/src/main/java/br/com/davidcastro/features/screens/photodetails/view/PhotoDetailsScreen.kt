@@ -352,6 +352,7 @@ private fun downloadImage(context: Context, url: String, name: String) {
         .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "image-${name}.jpg")
 
     downloadManager.enqueue(request)
+    showToast(context, R.string.download_title)
 }
 
 private fun showToast(context: Context, string: Int) {

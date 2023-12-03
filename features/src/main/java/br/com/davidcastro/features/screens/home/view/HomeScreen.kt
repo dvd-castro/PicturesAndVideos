@@ -17,6 +17,7 @@ import br.com.davidcastro.features.navigation.Routes
 import br.com.davidcastro.features.screens.home.viewmodel.HomeViewModel
 import br.com.davidcastro.features.screens.listscreen.model.ListScreenArgs
 import br.com.davidcastro.features.screens.listscreen.model.ListScreenType
+import br.com.davidcastro.features.screens.photodetails.data.PhotoDetailState
 import br.com.davidcastro.ui.R
 import br.com.davidcastro.ui.theme.Dimens.dimen16dp
 import br.com.davidcastro.ui.utils.extensions.doIfFalse
@@ -67,10 +68,15 @@ fun HomeScreen(
                 SessionTitleWidget(text = stringResource(id = R.string.session_title_popular), Modifier.padding(dimen16dp))
                 ImageHorizontalListWidget(
                     photos = it.photos,
-                    onItemClick = {
+                    onItemClick = { selectedIndex ->
                         navController.navigateWithArgs(
-                            route = Routes.PhotoListScreen.route,
-                            args = ListScreenArgs(type = ListScreenType.POPULAR)
+                            route = Routes.PhotoDetailScreen.route,
+                            args = PhotoDetailState(
+                                selectedIndex = selectedIndex,
+                                photos = it.photos.filterIndexed { index, _ ->
+                                    index == selectedIndex || index == selectedIndex + 1 || index == selectedIndex + 2
+                                }
+                            )
                         )
                     }
                 )
