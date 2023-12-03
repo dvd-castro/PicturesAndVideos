@@ -243,13 +243,6 @@ private fun BottomOptions(
                     .horizontalScroll(scrollState)
             ) {
                 BottomOption(
-                    text = stringResource(id = R.string.option_view_in_full_screen),
-                    icon = Icons.Outlined.Fullscreen
-                ) {
-
-                }
-
-                BottomOption(
                     text = stringResource(id = R.string.option_set_wallpaper),
                     icon = Icons.Outlined.PhoneAndroid
                 ) {
