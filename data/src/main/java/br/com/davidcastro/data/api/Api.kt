@@ -20,7 +20,7 @@ interface Api {
         @Query("per_page") perPage: Int = DEFAULT_PER_PAGE
     ): Response<PhotoResponse>
 
-    @GET("/v1//search")
+    @GET("/v1/search")
     suspend fun getSearchPhotos(
         @Query("query") query: String,
         @Query("page") page: Int,
